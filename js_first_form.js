@@ -1,56 +1,61 @@
-function cenaF() {
-    mn = document.form.kg.value;
-    k = eval(document.form.krmivo.value);
-    c = k * mn;
-    document.form.cena.value = c;
-}
-function celkF() {
-    krm = eval(document.form.krmivo.value);
-    mno = document.form.kg.value;
-    zakKrm = krm * mno;
- 
-    c111 = 0; c211 = 0; c311 = 0; c411 = 0;
-    if (document.form.bio.checked) {
-        c111 = zakKrm * eval(document.form.bio.value) / 100;
-    }
-    if (document.form.prem.checked) {
-        c211 = zakKrm * eval(document.form.prem.value) / 100;
-    }
-    if (document.form.ch.checked) {
-        c311 = zakKrm * eval(document.form.ch.value) / 100;
-    }
-    if (document.form.d.checked) {
-        c411 = eval(document.form.d.value);
-    }
-    v1 = zakKrm + c111 + c211 + c311 + c411;
 
-    d111 = 0; d211 = 0; d311 = 0;
-    if (document.form.dopr[0].checked) {
-        d111 = 0;
-    }
-    if (document.form.dopr[1].checked) {
-        d211 = v1 * eval(document.form.dopr[1].value) / 100;
-    }
-    if (document.form.dopr[2].checked) {
-        d311 = eval(document.form.dopr[2].value);
-    }
-    v2 = d111 + d211 + d311;
-    v = v1 + v2;
-    document.form.celkem.value = v;
-}
-function okF() {
-    if (parseFloat(document.form.mamPen.value) >= v) {
-        document.form.mamPen.value = "Mate dost penez";
-    } else {
-        document.form.mamPen.value = "Mate malo penez";
-    }
+function zakladni_cena() {
+    const vyber = document.querySelector("#vyber_krmiva").value;
+    const hmotnost = parseInt(document.querySelector("#vaha").value);
+    let zaklad = vyber * hmotnost;
+
+    document.querySelector("#zakl_cena").value = zaklad;
 }
 
-function emailKontrolaF(stringVstup) {
-    znaky = /^[0-9a-zA-Z]+$/;
-    if (znaky.test(stringVstup)) {
-        alert('Email v poradku');
-    } else {
-        alert('Spatny znak - zadej email znovu');
-    }
+
+function celkova_cena() {
+    let zakladni = parseInt(document.querySelector("#zakl_cena").value)
+    let total = zakladni
+
+    if (document.querySelector("#bio").checked)
+        total += zakladni * document.querySelector("#bio").value;
+    if (document.querySelector("#premium").checked)
+        total += zakladni * document.querySelector("#premium").value;
+    if (document.querySelector("#nekvalita").checked)
+        total -= zakladni * document.querySelector("#nekvalita").value;
+    if (document.querySelector("#darkove").checked)
+        total += parseInt(document.querySelector("#darkove").value);
+
+    if (document.querySelector("#osobni").checked)
+        total += parseInt(document.querySelector("#osobni").value);
+    if (document.querySelector("#firemni").checked)
+        total *= document.querySelector("#firemni").value;
+    if (document.querySelector("#posta").checked)
+        total += parseInt(document.querySelector("#posta").value);
+
+    document.querySelector("#celk_cena").value = total.toFixed(0)
 }
+
+
+function kontrolni_cena() {
+    let zadano = parseInt(document.querySelector("#odhad_cena").value);
+    let celkova = parseInt(document.querySelector("#celk_cena").value);
+
+    if (celkova <= zadano && celkova > 0)
+        document.querySelector("#zaver").textContent = "Máš na to."
+    else if (celkova > zadano)
+        document.querySelector("#zaver").textContent = "Nemáš na to."
+    else if (celkova = " " || celkova == 0)
+        document.querySelector("#zaver").textContent = "Zadej částku a objednej zboží!"
+    else
+        document.querySelector("#zaver").textContent = "Zadej částku!"
+}
+
+
+
+$("#mail").keypress(function (event) {
+    let znak = event.which;
+    let overZnak = false;
+
+    if (znak == 32) { overZnak = true; }
+    else if (48 <= znak && znak <= 57) { overZnak = true; }
+    else if (65 <= znak && znak <= 90) { overZnak = true; }
+    else if (97 <= znak && znak <= 122) { overZnak = true; }
+    return overZnak;
+});
+
