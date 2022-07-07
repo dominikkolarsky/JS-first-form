@@ -7,104 +7,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Objednavka</title>
 
+    <link rel="stylesheet" href="output.css">
+
 </head>
 
-<body class="m-1">
-    <div class="container my-3">
-        <fieldset class="border">
-            <legend>
-                <h2>Objednávka krmiva</h2>
-            </legend>
-            <form>
+<body class="text-white">
+    <div class="bg-[url('./bg_dog.jpg')] min-h-screen w-full bg-cover bg-bottom bg-no-repeat lg:bg-center flex">
+
+
+        <div class="flex flex-col mx-auto md:my-4 md:w-4/5 lg:w-4/5 2xl:w-2/5 xl:my-auto">
+            <!-- header -->
+            <header class="text-3xl font-bold bg-black bg-opacity-60 w-full flex justify-center p-4 rounded-t-3xl">
+                <h2 class="text-white">Objednávka krmiva</h2>
+            </header>
+
+            <div class="bg-black bg-opacity-40 p-6 flex flex-col rounded-b-3xl md:grid md:grid-cols-2 lg:p-10">
                 <!-- vyber -->
-                <h3>Výběr krmiva</h3>
-                <div>
-                    <div>
-                        <label for="vyber_krmiva" >Vyběr typu krmiva</label>
-                        <select  id="vyber_krmiva" name="vyberKrmiva" onclick="zakladni_cena(); celkova_cena();">
-                            <option selected value="0">nevybrano</option>
-                            <option value="150">Psí žrádlo 150 kč/kg</option>
-                            <option value="120">Kočičí žrádlo 120 kč/kg</option>
-                            <option value="50">Žrádlo pro rybičky 50 kč/kg</option>
-                            <option value="800">Žrádlo pro tygra 800 kč/kg</option>
-                        </select>
-                    </div>
+                <form class="col-span-2 max-w-md md:mb-6">
+                    <h3 class="text-xl font-bold text-white my-2">Výběr krmiva</h3>
+                    <div class="pl-4 flex flex-col space-y-1 mb-4">
+                        <div class="flex justify-between">
+                            <label for="vyber_krmiva">Typ krmiva: </label>
+                            <select class="bg-white bg-opacity-70 text-black w-44" id="vyber_krmiva" name="vyberKrmiva" onclick="zakladni_cena(); celkova_cena();">
+                                <option selected value="0" class="text-red">nevybrano</option>
+                                <option value="150">Psí žrádlo 150 kč/kg</option>
+                                <option value="120">Kočičí žrádlo 120 kč/kg</option>
+                                <option value="50">Žrádlo pro rybičky 50 kč/kg</option>
+                                <option value="800">Žrádlo pro tygra 800 kč/kg</option>
+                            </select>
+                        </div>
 
-                    <div>
-                        <label for="vaha">Hmotnost krmiva (kg)</label>
-                        <input  type="number" id="vaha" name="vaha" placeholder="" value="" onChange="zakladni_cena(); celkova_cena();">
-                    </div>
+                        <div class="flex justify-between">
+                            <label for="vaha">Hmotnost (Kg):</label>
+                            <input class="bg-white bg-opacity-70 text-black w-44" type="number" id="vaha" name="vaha" min="0" placeholder="" value="" onChange="zakladni_cena(); celkova_cena();">
+                        </div>
 
-                    <div>
-                        <label for="zakl_cena">Základní cena (Kč)</label>
-                        <input type="text" id="zakl_cena" name="zakl_cena" value="" class="form-control" disabled>
-                    </div>
-                </div>
-            </form>
-
-            <!-- vlastnosti krmiva -->
-            <form>
-                <h3>Vlastnosti krmiva</h3>
-                <div>
-                    <input type="checkbox" id="bio" name="vlastnosti" value="0.3" onClick="celkova_cena()">
-                    <label for="bio">Bio kvalita (+30% navic)</label><br>
-
-                    <input type="checkbox" id="premium" name="vlastnosti" value="0.5" onClick="celkova_cena()">
-                    <label for="premium">Extra premium kvalita (+50% navic)</label><br>
-
-                    <input type="checkbox" id="nekvalita" name="vlastnosti" value="0.15" onClick="celkova_cena()">
-                    <label for="nekvalita">Extra nekvalita pro chudé (-15% sleva)</label><br>
-
-                    <input type="checkbox" id="darkove" name="vlastnosti" value="500" onClick="celkova_cena()">
-                    <label for="darkove">Dárkové balení (+500 Kč navíc)</label>
-                </div>
-            </form>
-
-            <!-- doprava -->
-            <form>
-                <h3>Doprava</h3>
-                <div>
-                    <input type="radio" id="osobni" name="doprava" value="0" onClick="celkova_cena()">
-                    <label for="osobni">Osobní odběr (zdarma)</label><br>
-
-                    <input type="radio" id="firemni" name="doprava" value="1.1" onClick="celkova_cena()">
-                    <label for="firemni">Firemní kurýr (+10% navíc)</label><br>
-
-                    <input type="radio" id="posta" name="doprava" value="250" onClick="celkova_cena()">
-                    <label for="posta">Česká pošta (+250 kč navíc)</label><br>
-                </div>
-            </form>
-
-            <!-- konecna kalkulaceF -->
-            <form>
-                <h3>Konečná kalkulace</h3>
-                <div>
-                    <div>
-                        <div>
-                            <label for="celk_cena">Celková cena (Kč)</label>
-                            <input type="text" id="celk_cena" name="celk_cena" value="" disabled>
+                        <div class="flex justify-between">
+                            <label for="zakl_cena">Cena (Kč):</label>
+                            <input class="bg-white bg-opacity-40 text-black w-44" type="text" id="zakl_cena" name="zakl_cena" value="" disabled>
                         </div>
                     </div>
-                    <div>
+                </form>
+
+                <!-- vlastnosti krmiva -->
+                <form class="max-w-sm">
+                    <h3 class="text-xl font-bold text-white my-2">Vlastnosti krmiva</h3>
+
+                    <div class="pl-4 flex flex-col space-y-1 mb-4">
+                        <div class="flex space-x-4">
+                            <input type="checkbox" id="bio" name="vlastnosti" value="0.3" onClick="celkova_cena()">
+                            <label for="bio">Bio kvalita (+30% navic)</label>
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <input type="checkbox" id="premium" name="vlastnosti" value="0.5" onClick="celkova_cena()">
+                            <label for="premium">Extra premium kvalita (+50% navic)</label>
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <input type="checkbox" id="nekvalita" name="vlastnosti" value="0.15" onClick="celkova_cena()">
+                            <label for="nekvalita">Nekvalita pro chudé (-15% sleva)</label>
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <input type="checkbox" id="darkove" name="vlastnosti" value="500" onClick="celkova_cena()">
+                            <label for="darkove">Dárkové balení (+500 Kč navíc)</label>
+                        </div>
+
+                    </div>
+                </form>
+
+                <!-- doprava -->
+                <form>
+                    <h3 class="text-xl font-bold text-white my-2">Doprava</h3>
+                    <div class="pl-4 flex flex-col space-y-1 mb-4">
+                        <div class="flex space-x-4">
+                            <input type="radio" id="osobni" name="doprava" value="0" onClick="celkova_cena()">
+                            <label for="osobni">Osobní odběr (zdarma)</label>
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <input type="radio" id="firemni" name="doprava" value="1.1" onClick="celkova_cena()">
+                            <label for="firemni">Firemní kurýr (+10% navíc)</label>
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <input type="radio" id="posta" name="doprava" value="250" onClick="celkova_cena()">
+                            <label for="posta">Česká pošta (+250 kč navíc)</label>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- konecna kalkulaceF -->
+                <form class="col-span-2 max-w-md">
+                    <h3 class="text-xl font-bold text-white my-2">Konečná kalkulace</h3>
+                    <div class="pl-4 flex flex-col space-y-1 mb-2">
                         <div>
-                            <label for="odhad">Kolik můžu utratit (Kč)</label>
-                            <input type="number" id="odhad_cena" name="odhad_cena" value="">
-                            <div>
-                                <input type="button" value="Zkontrolovat" onClick="kontrolni_cena()">
-                                <p id="zaver"></p>
+                            <div class="flex space-y-1 mb-3 justify-between">
+                                <label for="celk_cena">Celková cena (Kč):</label>
+                                <input class="bg-white bg-opacity-40 text-black w-48 pl-4 ml-4" type="text" id="celk_cena" name="celk_cena" value="" disabled>
                             </div>
                         </div>
-                    </div>
+                        <div>
+                            <div class="flex space-y-1 justify-between">
+                                <label for="odhad">Kolik můžeš utratit (Kč):</label>
+                                <input class="bg-white bg-opacity-70 text-black w-48 pl-4 ml-4" type="number" id="odhad_cena" name="odhad_cena" value=" ">
+                            </div>
+                
+                        </div>
 
+                    </div>
+                </form>
+                <!-- button -->
+                <div class="flex flex-col my-3 col-span-2 items-center">
+                    <input class=" w-56 cursor-pointer p-4 bg-orange-400 bg-opacity-90 rounded-xl my-4 hover:bg-opacity-70 text-xl font-bold" type="button" value="Zkontrolovat" onClick="kontrolni_cena()">
+                    <p class="" id="zaver"></p>
                 </div>
-            </form>
-            <!-- zadani jmena -->
-            <form>
-                <h3>Zanechte svůj email</h3>
-                <span>Jméno: </span><input onpaste="return false" type="text" id="mail" name="mail" value=""><span> @gmail.com</span>
-            </form>
-        </fieldset>
+
+                <!-- zadani jmena -->
+                <form class="col-span-2 max-w-md">
+                    <h3 class="text-xl font-bold text-white my-2">Zanechte svůj email</h3>
+                    <input onpaste="return false" type="text" id="mail" name="mail" value="" placeholder="" class="pl-2 ml-4 bg-white bg-opacity-70 text-black w-44"><span> @gmail.com</span>
+                </form>
+
+            </div>
+        </div>
     </div>
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

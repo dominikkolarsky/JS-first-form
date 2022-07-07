@@ -7,7 +7,6 @@ function zakladni_cena() {
     document.querySelector("#zakl_cena").value = zaklad;
 }
 
-
 function celkova_cena() {
     let zakladni = parseInt(document.querySelector("#zakl_cena").value)
     let total = zakladni
@@ -31,22 +30,27 @@ function celkova_cena() {
     document.querySelector("#celk_cena").value = total.toFixed(0)
 }
 
-
 function kontrolni_cena() {
     let zadano = parseInt(document.querySelector("#odhad_cena").value);
     let celkova = parseInt(document.querySelector("#celk_cena").value);
 
-    if (celkova <= zadano && celkova > 0)
-        document.querySelector("#zaver").textContent = "Máš na to."
-    else if (celkova > zadano)
-        document.querySelector("#zaver").textContent = "Nemáš na to."
-    else if (celkova = " " || celkova == 0)
-        document.querySelector("#zaver").textContent = "Zadej částku a objednej zboží!"
-    else
-        document.querySelector("#zaver").textContent = "Zadej částku!"
+    if (celkova <= zadano && celkova > 0) {
+        document.querySelector("#zaver").innerHTML = "<div class='bg-green-600 bg-opacity-50 p-5'>Máš na to.</div>"
+    }
+    else if (celkova > zadano) {
+        document.querySelector("#zaver").innerHTML = "<div class='bg-red-600 bg-opacity-50 p-5 '>Nemáš na to.</div>"
+
+    }
+    else if (celkova = " " || celkova == 0) {
+        document.querySelector("#zaver").innerHTML = "<div class='bg-red-600 bg-opacity-50 p-5 md:my-4'>Prvně musíš objednat nějaké zboží a zadat kolik můžeš utratit!</div>"
+
+    }
+    else {
+        document.querySelector("#zaver").innerHTML = "<div class='bg-red-600 bg-opacity-50 p-5 '>Zadej částku!</div>"
+    }
+
+    
 }
-
-
 
 $("#mail").keypress(function (event) {
     let znak = event.which;
