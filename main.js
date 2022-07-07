@@ -35,18 +35,18 @@ function kontrolni_cena() {
     let celkova = parseInt(document.querySelector("#celk_cena").value);
 
     if (celkova <= zadano && celkova > 0) {
-        document.querySelector("#zaver").innerHTML = "<div class='bg-green-600 bg-opacity-50 p-5'>Máš na to.</div>"
+        document.querySelector("#zaver").innerHTML = "<div class='green'>Máš na to.</div>"
     }
     else if (celkova > zadano) {
-        document.querySelector("#zaver").innerHTML = "<div class='bg-red-600 bg-opacity-50 p-5 '>Nemáš na to.</div>"
+        document.querySelector("#zaver").innerHTML = "<div class='red'>Nemáš na to.</div>"
 
     }
     else if (celkova = " " || celkova == 0) {
-        document.querySelector("#zaver").innerHTML = "<div class='bg-red-600 bg-opacity-50 p-5 md:my-4'>Prvně musíš objednat nějaké zboží a zadat kolik můžeš utratit!</div>"
+        document.querySelector("#zaver").innerHTML = "<div class='red'>Prvně musíš objednat nějaké zboží a zadat kolik můžeš utratit!</div>"
 
     }
     else {
-        document.querySelector("#zaver").innerHTML = "<div class='bg-red-600 bg-opacity-50 p-5 '>Zadej částku!</div>"
+        document.querySelector("#zaver").innerHTML = "<div class='red'>Zadej částku!</div>"
     }
 
     
